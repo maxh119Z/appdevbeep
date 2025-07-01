@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function About() {
+export default function form() {
   const [fontsLoaded] = useFonts({
     Poppins_500Medium,
   });
@@ -72,7 +72,13 @@ export default function About() {
             </Text>
           </TouchableOpacity>
         </Link>
-         
+         <Link href="/" asChild style={styles.linkWrapper}>
+          <TouchableOpacity style={StyleSheet.flatten([styles.customButton, styles.shadowBox])}>
+            <Text style={styles.buttonText}>
+              &#9432;
+            </Text>
+          </TouchableOpacity>
+        </Link>
       </View>
       
 
