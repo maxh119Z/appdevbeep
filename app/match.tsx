@@ -7,6 +7,10 @@ import { Link } from 'expo-router';
 
 const screenWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
+  Image:{
+    width:"90%",
+    height:"auto",
+  },
   container: {
     flex: 1,
     paddingTop:40,
