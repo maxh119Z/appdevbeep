@@ -38,6 +38,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
   },
+  customSectionButton: {
+    backgroundColor: "#f7b5b8",
+    paddingVertical: 7,
+    justifyContent: "center",
+    borderRadius: 12,
+    marginTop: 10,
+    marginBottom: 20,
+  },
   customButton1: {
     backgroundColor: "#f7b5b8",
     justifyContent: "center",
@@ -52,9 +60,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins_500Medium",
   },
+  buttonText2: {
+    color: "white",
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "Poppins_500Medium",
+  },
   linkWrapper: {
     alignSelf: "center",
     width: 75,
+  },
+  linkWrapper3: {
+
+    alignSelf: "center",
+    
+    width: "75%",
   },
   linkWrapper1: {
     marginLeft:20,
@@ -85,6 +106,14 @@ const styles = StyleSheet.create({
   popup:{
     width:"100%",
     height:"100%",
+  },
+  section1: {
+    
+    width:"75%",
+    height:"75%",
+    alignSelf:"center",
+    marginTop:30,
+    
   },
   popup1: {
     // backgroundColor: 'red',
@@ -119,15 +148,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins_500Medium",
   },
-  Image1:{
-    paddingTop:20,
-    width:"80%",
-    height:undefined,
-    aspectRatio: 1.27,     
-    alignSelf: 'center',
-    resizeMode: 'contain',
+  Image1: {
+  flex: 1,                    
+  width: '100%',           
+  resizeMode: 'contain',
+  alignSelf: 'center',
+},
 
-  },
+Image2: {
+  flex: 1,
+  width: '100%',
+  resizeMode: 'contain',
+  alignSelf: 'center',
+},
 });
 
 export default function form() {
@@ -165,6 +198,22 @@ export default function form() {
       >
         <Text style={styles.buttonText}>&#9432;</Text>
       </Pressable>
+      </View>
+
+  
+      <View style={styles.section1}>
+               <Link href="/camera" asChild style={styles.linkWrapper3}>
+                      <TouchableOpacity style={StyleSheet.flatten([styles.customSectionButton, styles.shadowBox])}>
+                        <Text style={styles.buttonText2}>
+                          Start Recording!
+                        </Text>
+                      </TouchableOpacity>
+              </Link>
+          
+                <Image
+                          style={styles.Image2}
+                          source={require('./images/placeholder.png')}
+                        />
       </View>
 
       <Modal
