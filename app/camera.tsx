@@ -3,10 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import { Text, View, Button, StyleSheet, Image, Alert, TouchableOpacity, Dimensions} from "react-native";
 import { useFonts, Poppins_500Medium } from '@expo-google-fonts/poppins';
 import { Link } from 'expo-router';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 
 
 const screenWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
+  Image:{
+    width:"90%",
+    height:"auto",
+  },
   container: {
     flex: 1,
     paddingTop:40,
@@ -30,6 +35,13 @@ const styles = StyleSheet.create({
     shadowRadius: 7,
     elevation: 5,
   },
+  message: {
+    textAlign: 'center',
+    paddingBottom: 10,
+  },
+  camera: {
+    flex: 1,
+  },
   customButton: {
     backgroundColor: "#9fc9ae",
     paddingVertical: 4,
@@ -51,7 +63,23 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function About() {
+export default function camera() {
+  const [facing, setFacing] = useState<CameraType>('front');
+  const [permission, requestPermission] = useCameraPermissions();
+  if (!permission) {
+    // Camera permissions are still loading.
+    return <View />;
+  }
+  if (!permission.granted) {
+    // Camera permissions are not granted yet.
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
+
   const [fontsLoaded] = useFonts({
     Poppins_500Medium,
   });
@@ -62,6 +90,8 @@ export default function About() {
 
   return (
     <View style={styles.container}>
+      
+      
       <View style = {styles.custcontainer}>
         <Link href="/" asChild style={styles.linkWrapper}>
           <TouchableOpacity style={StyleSheet.flatten([styles.customButton, styles.shadowBox])}>
@@ -72,7 +102,11 @@ export default function About() {
         </Link>
          
       </View>
-      <Text>Work In Progress</Text>
+      <View style={styles.container}>
+      <CameraView style={styles.camera} facing={facing}>
+        
+      </CameraView>
+    </View>
 
       
     </View>

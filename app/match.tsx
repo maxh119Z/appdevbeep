@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Text, View, Button, StyleSheet, Image, Alert, TouchableOpacity, Dimensions} from "react-native";
 import { useFonts, Poppins_500Medium } from '@expo-google-fonts/poppins';
 import { Link } from 'expo-router';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 
 
 const screenWidth = Dimensions.get("window").width;
@@ -55,7 +56,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function About() {
+export default function match() {
+  const [facing, setFacing] = useState<CameraType>('front');
+  const [permission, requestPermission] = useCameraPermissions();
+
   const [fontsLoaded] = useFonts({
     Poppins_500Medium,
   });
