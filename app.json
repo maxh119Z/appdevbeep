@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.x1118maxz.bbb"
     },
     "web": {
       "bundler": "metro",
@@ -38,7 +39,8 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "expo-font"
+      "expo-font",
+      "react-native-vision-camera"
     ],
     "experiments": {
       "typedRoutes": true
