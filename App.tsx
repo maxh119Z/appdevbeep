@@ -1,28 +1,35 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import HomeScreen from './homescreen';
+import FormScreen from './form';
+import MatchScreen from './match';
+import AboutScreen from './about';
+import CameraScreen from './recording'
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+export type RootStackParamList = {
+  Home: undefined;
+  Form: undefined;
+  Match: undefined;
+  About: undefined;
+  Camera: undefined;
+};
 
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Form" component={FormScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Match" component={MatchScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="About" component={AboutScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Camera" component={CameraScreen} options={{ headerShown: false }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+};
 
 export default App;
