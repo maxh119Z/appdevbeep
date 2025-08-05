@@ -20,7 +20,7 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Form">;
 
 const FormScreen = () => {
   const navigation = useNavigation<NavigationProp>();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   return (
     <View style={styles.container}>
