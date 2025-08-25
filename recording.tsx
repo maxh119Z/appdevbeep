@@ -26,6 +26,7 @@ const Recording = () => {
   const [elbowPos2, setElbow2Pos] = useState<{ x: number, y: number } | null>(null);//non dominant hand
   const [shoulder2Angle, setShoulder2Angle] = useState<number | null>(null);//non dominant handz
   const [shoulder2Pos, setShoulder2Pos] = useState<{ x: number, y: number } | null>(null);
+  const [openProb, setPROB] = useState<number | null>(null);
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
@@ -51,7 +52,12 @@ const Recording = () => {
     }, [])
   );
 
+  const armProb = (p: number) => {
+    console.log("armprob:" + p)
+    if (!Number.isNaN(p)) setPROB(p);
+  };
   const onPoseDetected = (pose: any) => {
+    console.log("did I get a pose" + pose)
     const keypoints = pose;
     if (!keypoints || keypoints.length === 0) return;
 
@@ -167,16 +173,21 @@ const Recording = () => {
         style={[styles.customButton, styles.leftyButton]} 
         onPress={() => setIsLeftyMode(prev => !prev)}
       >
+        
         <Text style={styles.buttonText}>
-          .
+          
           {isLeftyMode ? 'L' : 'R'}
         </Text>
       </TouchableOpacity>
+      {openProb !== null && (
+      <Text style={styles.customText}>
+          {openProb}
+      </Text>)}
       </View>
       
       {!isPoseReady && (
         <Text style={{ margin: "auto", alignSelf: "center", position: "absolute", zIndex: 999, top: "50%" }}>
-          Please Wait a moment anxious generation
+          Camera Loading
         </Text>
       )}
       {cameraPermission === RESULTS.GRANTED ? (
@@ -191,6 +202,7 @@ const Recording = () => {
           isBackCamera={false}
           color={'255, 0, 0'}
           onPoseDetected={onPoseDetected}
+          armProb={armProb}
         />
       ) : (
         <View />
@@ -262,26 +274,34 @@ const Recording = () => {
 
 const styles = StyleSheet.create({
   customButton: {
-    backgroundColor: '#9fc9ae',
-    paddingVertical: 22,
-    position: 'absolute',
-    justifyContent: 'center',
-    zIndex: 1000,
-    width:75,
-    borderRadius: 12,
-    marginTop: 60,
-    marginLeft:25,
-  },
+  backgroundColor: '#9fc9ae',
+  paddingVertical: 12,
+  paddingHorizontal: 20,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 12,
+},
+customText:{
+  width: 80,
+  height:50,
+  backgroundColor: "gray",
+  color: "white",
+  justifyContent: 'center',
+  textAlign:"center",
+  alignItems: 'center',
+  fontSize:26,
+  borderRadius: 12,
+},
+
   headerButtonsContainer: {
   position: 'absolute',
-  display: "flex",
-  top: 10,
-  left: 15,
-  zIndex: 1000,
+  top: 50,
+  left: 20,
   flexDirection: 'row',
-  gap:5,
-
+  gap: 10,
+  zIndex: 1000,
 },
+
   headerButtons: {
     position: 'absolute',
     top: 60,
