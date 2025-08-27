@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from './App'; 
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -14,12 +15,12 @@ const MatchScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.custcontainer}>
-        <TouchableOpacity
-          style={[styles.customButton, styles.shadowBox]}
-          onPress={() => navigation.navigate('Home')}
-        >
-          <Text style={styles.buttonText}>&lt;</Text>
-        </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("Home")}
+                      style={[styles.customButton, styles.shadowBox, styles.linkWrapper]}
+                    >
+                      <Text style={styles.buttonText}><AntDesign name="arrowleft" size={31} color="#111" /></Text>
+                    </TouchableOpacity>
       </View>
 
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: -100 }}>
@@ -51,12 +52,12 @@ const styles = StyleSheet.create({
   },
   customButton: {
     backgroundColor: "#9fc9ae",
-    paddingVertical: 4,
+    paddingVertical: 18,
     justifyContent: "center",
     borderRadius: 12,
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 20,
-    width: 75,
+    width: 70,
     alignItems: "center",
   },
   buttonText: {
@@ -71,6 +72,9 @@ const styles = StyleSheet.create({
     color: "#333",
     textAlign: "center",
   },
+  linkWrapper:{
+    width:70,  
+  }
 });
 
 export default MatchScreen;

@@ -4,13 +4,13 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
+  ScrollView,
+  Image // Import Image for images
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "./App"; 
-
-const screenWidth = Dimensions.get("window").width;
+import { RootStackParamList } from "./App";
+import AntDesign from 'react-native-vector-icons/AntDesign'; // Still using for back arrow if needed
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "About">;
 
@@ -19,19 +19,45 @@ const AboutScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.custcontainer}>
+      {/* Header with Back Button */}
+      <View style={styles.headerContainer}>
         <TouchableOpacity
           onPress={() => navigation.navigate("Home")}
-          style={[styles.customButton, styles.shadowBox, styles.linkWrapper]}
+          style={[styles.customButton, styles.shadowBox]}
         >
-          <Text style={styles.buttonText}>&lt;</Text>
+          <AntDesign name="arrowleft" size={31} color="#111" />
         </TouchableOpacity>
       </View>
 
-      {/* You can add more content here */}
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={styles.aboutText}>About Page Coming Soon!</Text>
-      </View>
+      {/* Main Content */}
+      <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+        <Text style={styles.title}>App Creators</Text>
+        
+        {/* Angela's Card */}
+        <View style={[styles.card, styles.shadowBox]}>
+          <Image
+            source={require('./images/formguy.png')} // Replace with Angela's image path
+            style={styles.avatarImage}
+          />
+          <Text style={styles.name}>Angela</Text>
+          <Text style={styles.bio}>
+            angela is so cool. angela is so cool. angela is so cool. angela is so cool. angela is so cool.
+          </Text>
+        </View>
+
+        {/* Max's Card */}
+        <View style={[styles.card, styles.shadowBox]}>
+          <Image
+            source={require('./images/formguy.png')} // Replace with Max's image path
+            style={styles.avatarImage}
+          />
+          <Text style={styles.name}>Max</Text>
+          <Text style={styles.bio}>
+            maximus maxiumus maximusmaximusmaximusmaximusmaximusmaximusmaximusmaximusmaximus
+          </Text>
+        </View>
+
+      </ScrollView>
     </View>
   );
 };
@@ -41,48 +67,66 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 40,
     backgroundColor: "#fdf6ec",
-    justifyContent: "flex-start",
-    alignItems: "center",
   },
-  custcontainer: {
+  headerContainer: {
     width: "90%",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    alignSelf: 'center',
+  },
+  scrollContentContainer: {
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 40,
   },
   shadowBox: {
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.1,
     shadowRadius: 7,
     elevation: 5,
   },
   customButton: {
     backgroundColor: "#9fc9ae",
-    paddingVertical: 4,
+    paddingVertical: 18,
     justifyContent: "center",
     borderRadius: 12,
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 20,
-    width: 75,
+    width: 70,
     alignItems: "center",
   },
-  buttonText: {
-    color: "black",
-    fontSize: 46,
-    fontWeight: "bold",
-    textAlign: "center",
-    // fontFamily: "Poppins-Medium", // if you've manually added it
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 30,
+    textAlign: 'center',
   },
-  linkWrapper: {
-    alignSelf: "center",
-    width: 75,
+  card: {
+    backgroundColor: '#f8f8f2ff',
+    borderRadius: 15,
+    padding: 25,
+    width: '95%',
+    alignItems: 'center',
+    marginBottom: 35,
   },
-  aboutText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#333",
-    textAlign: "center",
+  avatarImage: { 
+    width: 100, // Adjust size as needed
+    height: 100, // Adjust size as needed
+    borderRadius: 50, // Makes the image circular
+    marginBottom: 15,
   },
+  name: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 10,
+  },
+  bio: {
+    fontSize: 16,
+    color: '#555',
+    textAlign: 'center',
+    lineHeight: 24,
+  }
 });
 
 export default AboutScreen;
