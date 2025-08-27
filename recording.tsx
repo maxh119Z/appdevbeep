@@ -1,16 +1,18 @@
 import React, { useCallback, useState } from 'react';
 import HumanPose from 'react-native-human-pose';
-import { View, StyleSheet, Platform, Dimensions, TouchableOpacity, Text, useWindowDimensions, } from 'react-native';
+import { Modal, View, StyleSheet, Platform, Dimensions, TouchableOpacity, Text, useWindowDimensions, } from 'react-native';
 import { request, PERMISSIONS, RESULTS, check, PermissionStatus } from 'react-native-permissions';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from './App';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import NoticePopup from './noticepopup'
 
 // const { width, height } = Dimensions.get('window');
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 const Recording = () => {
+  const [isNoticeVisible, setNoticeVisible] = useState(true);
   const { width, height } = useWindowDimensions();
 
   const [isLeftyMode, setIsLeftyMode] = useState(false);
@@ -165,6 +167,12 @@ const Recording = () => {
 
   return (
     <View style={{ flex: 1 }}>
+      <NoticePopup
+        visible={isNoticeVisible}
+        onClose={() => setNoticeVisible(false)}
+        title="Tips for Best Use"
+        message="Intentional attempts to “break” the AI will succeed, but the app is designed to give effective feedback when you practice with genuine badminton form. Having a basic grasp of effective form can be useful for determining AI hallucination."
+      />
       <View style={styles.headerButtonsContainer}>
         <TouchableOpacity style={StyleSheet.flatten([styles.customButton])} onPress={() => navigation.navigate('Home')}>
         <Text style={styles.buttonText}>&lt;</Text>

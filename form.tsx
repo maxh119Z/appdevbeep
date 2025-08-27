@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 import {
   Text,
   View,
@@ -30,7 +32,7 @@ const FormScreen = () => {
           onPress={() => navigation.navigate("Home")}
           style={[styles.customButton, styles.shadowBox, styles.linkWrapper]}
         >
-          <Text style={styles.buttonText}>&lt;</Text>
+          <Text style={styles.buttonText}><AntDesign name="arrowleft" size={31} color="#111" /></Text>
         </TouchableOpacity>
 
         <Pressable
@@ -42,7 +44,7 @@ const FormScreen = () => {
             pressed && { opacity: 0.7 },
           ]}
         >
-          <Text style={styles.buttonText}>&#9432;</Text>
+          <Text style={styles.buttonText}><AntDesign name="info" size={35} color="#111" /></Text>
         </Pressable>
       </View>
 
@@ -52,12 +54,16 @@ const FormScreen = () => {
           onPress={() => navigation.navigate("Camera")}
           style={[styles.customSectionButton, styles.shadowBox, styles.linkWrapper3]}
         >
-          <Text style={styles.buttonText2}>Start Recording!</Text>
+          <Text style={styles.buttonText2}>Start Form Detection <AntDesign name="camera" size={37} color="#2e1315ff" /></Text>
         </TouchableOpacity>
+        <View style={styles.subheader}>
+                <Text style = {styles.subheaderText}>Wifi Connection is Required!</Text>
+                
+        </View>
 
         <Image style={styles.Image2} source={require("./images/placeholder.png")} />
       </View>
-
+      
       {/* Info Modal */}
       <Modal transparent visible={visible} animationType="fade" onRequestClose={() => setVisible(false)}>
         <TouchableWithoutFeedback onPress={() => setVisible(false)}>
@@ -77,9 +83,10 @@ const FormScreen = () => {
                   </Pressable>
                   <Text style={styles.popuptext}>
                     Turn your device horizontally when your camera turns on.{"\n\n"}
-                    Hold up your badminton form, and the software will map your joints. A green circle indicates the correct form, while a red circle means something is wrong!
+                    Ensure  your entire upper body is visible. Hold up your badminton form, and the software will map your joints. Green = Good, while Red = something is wrong!
                   </Text>
                   <Image style={styles.Image1} source={require("./images/formguy.png")} />
+                 
                 </View>
                 <View style={styles.popup2}></View>
               </View>
@@ -112,20 +119,33 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   customButton: {
-    backgroundColor: "#b7c9b6",
-    paddingVertical: 4,
+    backgroundColor: "#9fc9ae",
+    paddingVertical: 18,
     justifyContent: "center",
     borderRadius: 12,
     marginTop: 10,
     marginBottom: 20,
-    width: 75,
+    width: 70,
     alignItems: "center",
+  },
+    subheaderText:{
+    color: "#1A202C",
+    fontSize: 18,
+    fontFamily: 'Inter_28pt-SemiBoldItalic',
+    alignSelf:"center",
+  },
+  subheader:{
+    width: "100%",
+    justifyContent: "center",
+    textAlign:"center",
+    alignItems: "center",
+    flexDirection:"row",
   },
   customSectionButton: {
     backgroundColor: "#f7b5b8",
     paddingVertical: 7,
     justifyContent: "center",
-    borderRadius: 12,
+    borderRadius: 7,
     marginTop: 10,
     marginBottom: 20,
   },
@@ -133,34 +153,35 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7b5b8",
     justifyContent: "center",
     borderRadius: 12,
-    marginTop: 15,
-    marginBottom: 20,
-    width: 55,
-    height: 55,
+    marginTop: 10,
+    marginLeft:10,
+    marginBottom: 10,
+    width: 40,
+    height: 40,
     alignItems: "center",
    
   },
   buttonText: {
     color: "white",
     fontSize: 46,
-    fontWeight: "bold",
+    fontFamily: "Inter_28pt-ExtraBold",
     textAlign: "center",
   },
   buttonText2: {
-    color: "white",
-    fontSize: 26,
-    fontWeight: "bold",
+    color: "#2e1315ff",
+    fontSize: 27,
+    fontFamily: "Inter_28pt-ExtraBold",
     textAlign: "center",
   },
   buttonText1: {
     color: "white",
-    fontSize: 33,
-    fontWeight: "bold",
+    fontSize: 23,
+    fontFamily: "Inter_28pt-ExtraBold",
     textAlign: "center",
   },
   linkWrapper: {
     alignSelf: "center",
-    width: 75,
+    width: 70,
   },
   linkWrapper3: {
     alignSelf: "center",
@@ -205,24 +226,23 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
     fontSize: 15,
-    fontWeight: "bold",
+    fontFamily: "Inter_28pt-Bold",
     textAlign: "center",
   },
   section1: {
     width: "75%",
     height: "75%",
     alignSelf: "center",
-    marginTop: 30,
+    marginTop: 15,
   },
   Image1: {
-    flex: 1,
-    width: "100%",
+    flex: 0.9,
     resizeMode: "contain",
     alignSelf: "center",
   },
   Image2: {
     flex: 1,
-    width: "100%",
+    width: "120%",
     resizeMode: "contain",
     alignSelf: "center",
   },
